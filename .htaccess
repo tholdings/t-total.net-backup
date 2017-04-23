@@ -1,0 +1,21 @@
+# BEGIN optimizeMember GZIP exclusions
+<IfModule rewrite_module>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{QUERY_STRING} (^|\?|&)optimizemember_file_download\=.+ [OR]
+    RewriteCond %{QUERY_STRING} (^|\?|&)no-gzip\=1
+    RewriteRule .* - [E=no-gzip:1]
+</IfModule>
+# END optimizeMember GZIP exclusions
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
